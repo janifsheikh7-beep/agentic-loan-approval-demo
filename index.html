@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanctum — Agentic personal loan approval</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+:root{--bg:#f6f7fb;--sf:#fff;--tx:#14172b;--mu:#5b6078;--ln:#dfe2ee;--pr:#2a2f8f;--ac:#e8a317;--ok:#1b7f4b;--wn:#b8700a;--bd:#c2362f;--okb:#e3f4ea;--wnb:#fdf1da;--bdb:#fbe5e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1224;--sf:#181c36;--tx:#eceefa;--mu:#9aa0c4;--ln:#2b3058;--pr:#8f96ff;--ac:#f1b53d;--ok:#5fd394;--wn:#f0b34f;--bd:#ff8a82;--okb:#12301f;--wnb:#35260c;--bdb:#3a1614}}
+:root[data-theme="dark"]{--bg:#0f1224;--sf:#181c36;--tx:#eceefa;--mu:#9aa0c4;--ln:#2b3058;--pr:#8f96ff;--ac:#f1b53d;--ok:#5fd394;--wn:#f0b34f;--bd:#ff8a82;--okb:#12301f;--wnb:#35260c;--bdb:#3a1614}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2rem,5vw,3.2rem)}h2{font-size:1.7rem}h3{font-size:1.15rem}
+p{max-width:68ch}a{color:var(--pr)}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:12px 20px;background:var(--sf);border-bottom:1px solid var(--ln);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav b{font-family:Fraunces,serif;font-size:1.2rem;margin-right:auto;color:var(--pr)}
+nav button{background:none;border:0;color:var(--mu);font:inherit;padding:8px 12px;border-radius:8px;cursor:pointer}
+nav button.on{background:var(--pr);color:var(--bg)}
+button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+main{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+section.pg{display:none}section.pg.on{display:block}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:18px}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.pick{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.pick button{flex:1 1 220px;text-align:left;background:var(--sf);border:2px solid var(--ln);border-radius:12px;padding:12px 14px;font:inherit;color:var(--tx);cursor:pointer}
+.pick button.on{border-color:var(--pr)}.pick small{display:block;color:var(--mu)}
+.run{background:var(--ac);color:#241a00;border:0;border-radius:10px;padding:12px 22px;font:600 1rem inherit;cursor:pointer}
+.run:disabled{opacity:.5}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{border-left:3px solid var(--ln);padding:2px 0 14px 14px;margin-left:6px;position:relative}
+.tl li:before{content:"";position:absolute;left:-8px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--pr)}
+.tl .ag{font-weight:600}.tl .src{font-size:.82rem;color:var(--mu)}
+.tag{display:inline-block;font-size:.78rem;border-radius:99px;padding:1px 9px;font-weight:600}
+.pass{background:var(--okb);color:var(--ok)}.warn{background:var(--wnb);color:var(--wn)}.fail{background:var(--bdb);color:var(--bd)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}td,th{border-bottom:1px solid var(--ln);padding:7px 6px;text-align:left;vertical-align:top}
+.rec{border-width:2px}.rec.approve{border-color:var(--ok)}.rec.refer{border-color:var(--wn)}.rec.reject{border-color:var(--bd)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.acts button{border:1px solid var(--ln);background:var(--sf);color:var(--tx);border-radius:9px;padding:9px 16px;font:inherit;cursor:pointer}
+.acts .a{background:var(--ok);color:#fff;border:0}.acts .r{background:var(--bd);color:#fff;border:0}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.steps span{border:1px solid var(--ln);border-radius:8px;padding:5px 10px;font-size:.85rem;color:var(--mu)}
+.steps span.d{background:var(--okb);color:var(--ok);border-color:var(--ok)}
+.hide{display:none}.mu{color:var(--mu)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.flow>div{flex:1 1 130px;background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:10px;font-size:.9rem}
+.flow>i{align-self:center;color:var(--mu);font-style:normal}
+.band{border-radius:12px;padding:18px;margin:14px 0}
+.b1{background:var(--sf);border:1px solid var(--ln)}
+.layer{display:grid;grid-template-columns:150px 1fr;gap:12px;border:1px solid var(--ln);background:var(--sf);border-radius:10px;padding:12px;margin-bottom:10px}
+.layer b{color:var(--pr)}
+@media(max-width:640px){.layer{grid-template-columns:1fr}}
+details{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:10px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{text-align:center;color:var(--mu);font-size:.85rem;padding:20px}
+.hero{padding:10px 0 20px}
+.bar{height:10px;border-radius:6px;background:var(--ln);overflow:hidden}.bar i{display:block;height:100%;background:var(--pr)}
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+<b>Sanctum</b>
+<button data-p="story" class="on">Our approach</button><button data-p="demo">Live demo</button><button data-p="arch">Architecture</button><button data-p="about">About &amp; FAQ</button>
+</nav>
+<main>
+
+<section class="pg on" id="story">
+<div class="hero"><h1>From application to sanction in minutes, with a credit officer still in charge</h1>
+<p>A point-of-view for Retail Lending: an agentic AI layer for <b>salaried personal loans (₹1–15 lakh, 12–60 months)</b>, built on a single lakehouse that brings together policy documents, core banking data and external checks.</p></div>
+
+<h2>Act 1 — One place for everything the decision needs</h2>
+<p class="mu">Today the credit officer opens a bureau portal, the core banking screen, a stack of PDFs and a policy folder. The data is correct but scattered. The lakehouse fixes that first.</p>
+<div class="grid g3">
+<div class="card"><h3>Documents</h3><p>RBI circulars, credit policy, KYC, salary slips, statements. Read once, stored as searchable text and fields.</p></div>
+<div class="card"><h3>Bank data</h3><p>Customers, accounts, existing loans, repayments from core banking, refreshed continuously.</p></div>
+<div class="card"><h3>External checks</h3><p>Bureau, PAN, Aadhaar e-KYC, Account Aggregator, employer. Fetched with consent, every response logged.</p></div></div>
+<div class="flow"><div><b>Bronze</b><br>Raw files and API responses, untouched</div><i>→</i><div><b>Silver</b><br>Cleaned, validated, standardised</div><i>→</i><div><b>Gold</b><br>One “customer 360” view the agents read</div></div>
+
+<h2 style="margin-top:34px">Act 2 — Agents that do the legwork, humans who decide</h2>
+<div class="flow">
+<div><b>Intake agent</b><br>Reads documents, flags mismatches</div><i>→</i>
+<div><b>Credit agent</b><br>Pulls data, checks policy, computes FOIR, writes reasons</div><i>→</i>
+<div><b>Credit officer</b><br>Approves, modifies, refers or rejects</div><i>→</i>
+<div><b>Sanction &amp; disburse</b><br>KFS, e-sign, e-mandate, payout</div></div>
+<p>Arithmetic and hard rules run as plain code, so they never drift. The AI reads, reasons and explains. Every reason cites the data point and the policy clause it relied on.</p>
+
+<h2 style="margin-top:34px">What changes for the bank</h2>
+<div class="grid g3">
+<div class="card"><h3>Speed</h3><p>Clean cases ready for the officer in minutes instead of days (target to validate in a pilot).</p></div>
+<div class="card"><h3>Consistency</h3><p>Same policy, same checks, every branch and every officer.</p></div>
+<div class="card"><h3>Compliance</h3><p>Full audit trail, human sign-off, clear rejection reasons under the Fair Practices Code.</p></div></div>
+<p><button class="run" onclick="go('demo')">Watch it decide a loan</button></p>
+</section>
+
+<section class="pg" id="demo">
+<h1>Live demo: officer workbench</h1>
+<p class="mu">Product: salaried personal loan. All applicants, bureau and bank data are synthetic and simulated in the browser to show the journey. In a build, the same steps read from BigQuery.</p>
+<div class="pick" id="pick"></div>
+<button class="run" id="go">Run the agents</button>
+<div class="steps" id="stages"></div>
+<div class="grid g2" style="margin-top:16px">
+<div class="card"><h3>Agent activity</h3><ul class="tl" id="tl"><li class="mu">Pick an applicant and run the agents.</li></ul></div>
+<div class="card"><h3>Data pulled by source</h3><div id="data" class="mu">Nothing fetched yet.</div></div></div>
+<div id="out" class="hide"></div>
+</section>
+
+<section class="pg" id="arch">
+<h1>Architecture</h1>
+<p class="mu">Functional layers on the left, the Google Cloud services that implement them on the right.</p>
+<div class="layer"><b>Channels</b><div>Applicant portal and officer workbench (web app, Cloud Run). API gateway and role-based sign-in.</div></div>
+<div class="layer"><b>Agent runtime</b><div>Orchestrator (FastAPI on Cloud Run) managing session state and handoffs. Intake agent and Credit agent as bounded specialists; Claude or Gemini as reasoning model; deterministic code for EMI, FOIR and cut-offs.</div></div>
+<div class="layer"><b>Tool box</b><div>BigQuery query tool, policy vector search (RAG), bureau, PAN/Aadhaar, Account Aggregator and employer checks via mock services, exposed as functions or MCP tools.</div></div>
+<div class="layer"><b>Lakehouse</b><div>BigQuery bronze, silver and gold datasets. Cloud Storage for documents with object tables, Document AI for extraction, embeddings and vector index for policies.</div></div>
+<div class="layer"><b>Ingestion</b><div>Datastream or batch loads from core banking, Cloud Storage uploads for documents, API response logging for external data.</div></div>
+<div class="layer"><b>Human in the loop</b><div>Officer decision screen, delegated-authority routing, override reasons stored as feedback for policy and prompt tuning.</div></div>
+<div class="layer"><b>Governance</b><div>IAM, row and column security, PII masking, consent records, Dataplex lineage, Cloud Audit Logs, versioned prompts and policies, bias and drift review aligned to RBI’s FREE-AI principles.</div></div>
+<div class="layer"><b>Not applicable</b><div>CERSAI is excluded because a personal loan has no collateral. It returns when the same platform extends to home loans.</div></div>
+</section>
+
+<section class="pg" id="about">
+<h1>About &amp; FAQ</h1>
+<p>Sanctum is a presales point-of-view demo for banking customers. It uses synthetic data only and is not a production system.</p>
+<details><summary>Will AI approve loans on its own?</summary><p>No. The agents recommend with reasons. A credit officer makes the final decision.</p></details>
+<details><summary>How are hallucinations prevented?</summary><p>Policy answers are retrieved with citations, calculations are deterministic code, and low-confidence or flagged cases go to a human.</p></details>
+<details><summary>How do policy changes reach the agents?</summary><p>New circulars and policy versions are uploaded, indexed and used at the next case, with no code change.</p></details>
+<details><summary>How is customer data protected?</summary><p>Consent capture, masking, role-based access and full audit logs, in line with DPDP and RBI expectations.</p></details>
+<details><summary>Why BigQuery?</summary><p>Serverless SQL, vector search, object tables for documents and built-in governance in one platform.</p></details>
+<h3 style="margin-top:24px">Contact us</h3>
+<p>Presales team: <a href="mailto:presales@example.com">presales@example.com</a> (placeholder address). Ask for a 30-minute walkthrough.</p>
+</section>
+</main>
+<footer>Sanctum point-of-view demo. Synthetic data. Illustrative figures.</footer>
+
+<script>
+const A=[
+{id:0,n:"Priya Nair",d:"Strong profile",emp:"TCS (Category A)",inc:85000,emi:12000,cibil:782,enq:1,bnc:0,amt:400000,ten:36,rate:12.5,slip:"Priya Nair",kyc:"Priya Nair",tenure:6.5,days:"Salary credited 1st–3rd each month"},
+{id:1,n:"Rahul Mehta",d:"Borderline: high obligations",emp:"Mid-size IT firm (Category B)",inc:48000,emi:14000,cibil:698,enq:3,bnc:0,amt:500000,ten:48,rate:14.5,slip:"Rahul Mehta",kyc:"Rahul Mehta",tenure:2.1,days:"Salary credited 28th–2nd"},
+{id:2,n:"Karan Singh",d:"Risky: weak credit, mismatch",emp:"Unlisted trading firm (Uncategorised)",inc:32000,emi:9000,cibil:612,enq:6,bnc:2,amt:300000,ten:36,rate:16,slip:"Karan S. Singh",kyc:"Karan Singh",tenure:0.5,days:"Irregular salary dates"}];
+const inr=x=>"₹"+Math.round(x).toLocaleString("en-IN");
+const EMI=(p,r,n)=>{r=r/1200;return p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)};
+const maxP=(e,r,n)=>{r=r/1200;return e*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n))};
+const lim=i=>i>60000?.55:i>=30000?.5:.4;
+let cur=0,timers=[];
+function go(p){document.querySelectorAll(".pg").forEach(s=>s.classList.toggle("on",s.id==p));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p==p));location.hash=p;window.scrollTo(0,0)}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.p));
+if(["story","demo","arch","about"].includes(location.hash.slice(1)))go(location.hash.slice(1));
+function pick(){const el=document.getElementById("pick");el.innerHTML="";A.forEach(a=>{const b=document.createElement("button");b.className=a.id==cur?"on":"";b.innerHTML=`<b>${a.n}</b><small>${a.d}</small><small>${inr(a.amt)} over ${a.ten} months</small>`;b.onclick=()=>{cur=a.id;reset();pick()};el.appendChild(b)})}
+function reset(){timers.forEach(clearTimeout);timers=[];tl.innerHTML='<li class="mu">Pick an applicant and run the agents.</li>';data.innerHTML="Nothing fetched yet.";out.className="hide";stages.innerHTML="";go_.disabled=false}
+const tl=document.getElementById("tl"),data=document.getElementById("data"),out=document.getElementById("out"),stages=document.getElementById("stages"),go_=document.getElementById("go");
+const ST=["Application","Intake agent","Data pull","Policy check","Credit assessment","Officer decision","Sanction","Disbursement"];
+function stg(n){stages.innerHTML=ST.map((s,i)=>`<span class="${i<n?"d":""}">${s}</span>`).join("")}
+function analyse(a){
+ const emi=EMI(a.amt,a.rate,a.ten),foir=(a.emi+emi)/a.inc,L=lim(a.inc),mult=a.amt/a.inc,R=[];
+ const nm=a.slip==a.kyc;
+ R.push([nm?"pass":"fail","Name on salary slip matches KYC",nm?"Both read “"+a.kyc+"”":`Slip reads “${a.slip}”, KYC reads “${a.kyc}”`,"Credit Policy §2.3 Document consistency"]);
+ R.push([a.cibil>=700?"pass":a.cibil>=650?"warn":"fail","Bureau score",`CIBIL ${a.cibil}, ${a.enq} enquiries in 6 months`,"Credit Policy §3.1: ≥700 proceed, 650–699 refer, <650 decline"]);
+ R.push([foir<=L?"pass":"fail","FOIR",`${(foir*100).toFixed(0)}% against limit ${(L*100).toFixed(0)}% (EMI ${inr(emi)} plus existing ${inr(a.emi)})`,"Credit Policy §4.2 Affordability by income slab"]);
+ R.push([mult<=15?"pass":"fail","Loan to monthly income",mult.toFixed(1)+"× against cap 15×","Credit Policy §4.4"]);
+ R.push([a.bnc==0?"pass":"fail","EMI or cheque bounces (6 months)",a.bnc+" found in bank statement","Credit Policy §5.1: any bounce is a risk flag"]);
+ R.push([a.tenure>=1&&!a.emp.includes("Uncat")?"pass":a.tenure>=1?"warn":"fail","Employer and tenure",`${a.emp}, ${a.tenure} years`,"Credit Policy §3.4 Approved employer list, minimum 6 months in job"]);
+ const f=R.filter(r=>r[0]=="fail").length,w=R.filter(r=>r[0]=="warn").length;
+ let dec,why,cx="";
+ if(f==0&&w==0){dec="approve";why="All policy checks pass."}
+ else if(a.cibil<650||a.bnc>0||!nm){dec="reject";why="Hard policy failures and a document fraud signal. Recommend decline with reasons, route for officer review."}
+ else{dec="refer";const mp=Math.floor(maxP(Math.max(L*a.inc-a.emi,0),a.rate,a.ten)/10000)*10000;why="FOIR above limit and bureau score in the refer band. Counter-offer possible.";cx=`Suggested counter-offer: ${inr(mp)} over ${a.ten} months (EMI about ${inr(EMI(mp,a.rate,a.ten))}), which brings FOIR within ${(L*100).toFixed(0)}%.`}
+ return{emi,foir,R,dec,why,cx}}
+go_.onclick=()=>{reset();go_.disabled=true;const a=A[cur],r=analyse(a);let t=0,k=0;
+ const step=(ag,txt,src,d)=>{timers.push(setTimeout(()=>{if(tl.querySelector(".mu"))tl.innerHTML="";tl.insertAdjacentHTML("beforeend",`<li><span class="ag">${ag}</span><br>${txt}<br><span class="src">${src}</span></li>`);if(d)data.innerHTML=(k++?data.innerHTML:"")+d;if(k==1&&d)data.innerHTML=d},t+=900))};
+ const stage=n=>timers.push(setTimeout(()=>stg(n),t));
+ stage(1);
+ step("Intake agent","Read salary slips (3), bank statement (6 months) and KYC. Extracted name, employer, net salary, salary dates.","Cloud Storage → Document AI → silver tables",`<h3 style="font-size:1rem">Documents</h3><p>Net salary ${inr(a.inc)}. ${a.days}. Name on slip: ${a.slip}.</p>`);
+ stage(2);
+ step("Credit agent","Queried customer 360 for accounts, existing loans and repayment history.","BigQuery gold.customer_360",null);
+ timers.push(setTimeout(()=>{data.insertAdjacentHTML("beforeend",`<h3 style="font-size:1rem">Core banking (BigQuery)</h3><p>Existing EMIs ${inr(a.emi)} per month. Bounces in 6 months: ${a.bnc}.</p>`)},t));
+ step("Credit agent","Requested bureau report with customer consent. Logged response for audit.","Mock CIBIL service",null);
+ timers.push(setTimeout(()=>data.insertAdjacentHTML("beforeend",`<h3 style="font-size:1rem">Bureau (mock)</h3><p>Score ${a.cibil}. Enquiries: ${a.enq}.</p>`),t));
+ step("Credit agent","Verified PAN, Aadhaar e-KYC and employer record; fetched Account Aggregator data.","Mock PAN, UIDAI, EPFO and AA services",null);
+ timers.push(setTimeout(()=>data.insertAdjacentHTML("beforeend",`<h3 style="font-size:1rem">External checks (mock)</h3><p>PAN valid. Aadhaar e-KYC done. Employer: ${a.emp}.</p>`),t));
+ stage(3);
+ step("Credit agent","Retrieved the policy clauses that apply to this amount, income slab and employer category.","Vector search over Credit Policy v3.2 and RBI circulars",null);
+ stage(4);
+ step("Credit agent (deterministic code)",`Computed EMI ${inr(r.emi)} and FOIR ${(r.foir*100).toFixed(0)}%. Applied rules.`,"EMI and FOIR calculators",null);
+ timers.push(setTimeout(()=>{stg(5);show(a,r)},t+900))};
+function show(a,r){
+ const L={approve:"Recommend approve",refer:"Recommend refer with counter-offer",reject:"Recommend decline"}[r.dec];
+ out.className="";out.innerHTML=`<div class="card rec ${r.dec}" style="margin-top:16px"><h2>${L}</h2><p>${r.why}</p>${r.cx?`<p><b>${r.cx}</b></p>`:""}
+ <table><tr><th>Check</th><th>Finding</th><th>Policy relied on</th></tr>${r.R.map(x=>`<tr><td><span class="tag ${x[0]}">${x[0]}</span> ${x[1]}</td><td>${x[2]}</td><td class="mu">${x[3]}</td></tr>`).join("")}</table>
+ <p class="mu">Confidence: ${r.dec=="approve"?"High":r.dec=="refer"?"Medium":"High on data, low on intent"}. This is a recommendation. Only the credit officer can sanction.</p>
+ <div class="acts" id="acts"><button class="a" data-d="Approved">Approve</button><button data-d="Approved with modified terms">Approve modified</button><button data-d="Referred to senior credit manager">Refer</button><button class="r" data-d="Rejected with reasons">Reject</button></div><div id="res"></div></div>`;
+ document.querySelectorAll("#acts button").forEach(b=>b.onclick=()=>{const d=b.dataset.d,ok=d.startsWith("Approved"),ov=(r.dec=="approve")!=ok&&r.dec!="refer";
+  document.getElementById("res").innerHTML=`<p style="margin-top:14px"><b>Officer decision: ${d}.</b> Logged to BigQuery audit table with reasons${ov?" and flagged as an override for review":""}.</p>`+(ok?`<div class="steps"><span class="d">Sanction letter and KFS issued</span><span class="d">e-Sign and e-mandate done</span><span class="d">Disbursed to applicant’s account</span></div>`:`<p class="mu">Applicant is sent the reasons in line with the Fair Practices Code.</p>`);stg(ok?8:6)})}
+pick();stg(0);
+</script>
+</body>
+</html>
